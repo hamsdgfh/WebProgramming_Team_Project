@@ -18,8 +18,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const gateSoundOff = document.getElementById("gateSoundOff");
 
   if (bgAudio) {
-  bgAudio.volume = 0.4; // 0 ~ 1 사이 값, 원하면 조절
-}
+    bgAudio.volume = 0.4; // BGM 살짝 줄인 볼륨
+  }
 
   let isPlaying = false;
 
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
     updateSoundUI();
   };
 
-  // 🔊 헤더 토글 버튼
+  // 헤더 토글 버튼
   if (soundToggle && bgAudio) {
     soundToggle.addEventListener("click", async () => {
       if (!isPlaying) {
@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 🔊 첫 진입 사운드 게이트
+  // 첫 진입 사운드 게이트
   if (soundGate && gateSoundOn && gateSoundOff) {
     gateSoundOn.addEventListener("click", async () => {
       await playAudio();
@@ -81,6 +81,12 @@ document.addEventListener("DOMContentLoaded", () => {
       }, 600);
     });
   }
+
+  // ✨ 자동으로 reveal을 붙여줄 대상들
+  const extraRevealTargets = document.querySelectorAll(
+    ".card, .season-card, .media-block, .stack-block, .image-placeholder, .themes-panel, .video-frame, .ost-placeholder"
+  );
+  extraRevealTargets.forEach((el) => el.classList.add("reveal"));
 
   // ✨ 섹션 reveal (IntersectionObserver)
   const revealElements = document.querySelectorAll(".reveal");
