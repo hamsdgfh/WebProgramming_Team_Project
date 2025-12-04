@@ -1,1 +1,332 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>리틀 포레스트 – Little Forest Film Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="logo">Little Forest</div>
+    <nav class="main-nav">
+      <a href="#hero">Home</a>
+      <a href="#intro">About</a>
+      <a href="#trailer">Trailer</a>
+      <a href="#seasons">Seasons</a>
+      <a href="#recipes">Food</a>
+      <a href="#characters">Characters</a>
+      <a href="#themes">Themes</a>
+      <a href="#ost">Music</a>
+      <a href="#credits">Credits</a>
+    </nav>
+    <button class="sound-toggle" id="soundToggle" aria-label="Toggle sound">
+      SOUND OFF
+    </button>
+  </header>
 
+  <!-- 배경 음악 (직접 파일 넣거나, 나중에 JS로 컨트롤할 수 있음) -->
+  <audio id="bgAudio" loop>
+    <!-- 예: <source src="assets/audio/little-forest-bgm.mp3" type="audio/mpeg" /> -->
+  </audio>
+
+  <main>
+    <!-- HERO -->
+    <section id="hero" class="section hero">
+      <!-- 필요하면 이 아래에 video 태그 추가 가능 -->
+      <!--
+      <video class="hero-video" autoplay muted loop playsinline>
+        <source src="assets/video/field-loop.mp4" type="video/mp4" />
+      </video>
+      -->
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <p class="hero-kicker">four seasons, one small kitchen</p>
+        <h1 class="hero-title">리틀 포레스트</h1>
+        <p class="hero-subtitle">
+          도시 생활에 지친 혜원이 다시 돌아온 고향 마을.  
+          사계절을 따라 흘러가는 음식과 일상의 기록.
+        </p>
+        <div class="hero-actions">
+          <button class="primary-btn" data-scroll="#trailer">
+            예고편 보기
+          </button>
+          <button class="ghost-btn" data-scroll="#intro">
+            영화 살펴보기
+          </button>
+        </div>
+        <div class="scroll-indicator" data-scroll="#intro">
+          <span>scroll</span>
+          <div class="scroll-line"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTRO -->
+    <section id="intro" class="section section-intro reveal">
+      <div class="section-inner narrow">
+        <h2 class="section-title">About the Film</h2>
+        <p class="section-tagline">
+          도망치듯 떠났던 도시, 다시 돌아온 고향.  
+          밥을 짓고, 농사를 짓고, 마음을 다시 짓는 영화.
+        </p>
+        <p class="body-text">
+          <em>리틀 포레스트</em>는 시험, 취업, 인간관계에 지친 혜원이
+          잠시 서울을 떠나 고향 집으로 돌아와 사계절을 보내는 이야기를 담은 영화입니다.
+          화려한 사건이나 극적인 반전 대신, 계절에 따라 바뀌는 밥상과
+          작은 노동, 느린 호흡 속에서 ‘지금 여기를 살아가는 힘’을 보여줍니다.
+        </p>
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="label">감독</span>
+            <span class="value">임순례</span>
+          </div>
+          <div class="info-item">
+            <span class="label">개봉</span>
+            <span class="value">2018</span>
+          </div>
+          <div class="info-item">
+            <span class="label">배경</span>
+            <span class="value">한국의 작은 시골 마을</span>
+          </div>
+          <div class="info-item">
+            <span class="label">장르</span>
+            <span class="value">드라마 / 힐링</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRAILER -->
+    <section id="trailer" class="section section-dark reveal">
+      <div class="section-inner">
+        <div class="section-header">
+          <h2 class="section-title">Trailer</h2>
+          <p class="section-tagline">
+            계절이 바뀌는 속도로, 마음도 조금씩 바뀐다.
+          </p>
+        </div>
+        <div class="trailer-layout">
+          <div class="trailer-video">
+            <div class="video-frame">
+              <!-- YouTube 공식 예고편 ID로 교체 -->
+              <iframe
+                src="https://www.youtube.com/embed/VIDEO_ID"
+                title="리틀 포레스트 예고편"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+          <div class="trailer-text">
+            <p class="body-text">
+              작은 집, 작은 부엌, 작은 텃밭.  
+              그리고 그 속에서 다시 시작하는 한 사람의 일상.  
+              예고편만으로도 영화의 공기와 속도를 충분히 느낄 수 있습니다.
+            </p>
+            <p class="body-text subtle">
+              * 이 사이트는 상업적 목적이 아닌, 대학교 과제용 데모 페이지입니다.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEASONS -->
+    <section id="seasons" class="section reveal">
+      <div class="section-inner">
+        <h2 class="section-title">Seasons</h2>
+        <p class="section-tagline">
+          밥상과 풍경이 알려주는, 사계절의 마음.
+        </p>
+        <div class="card-grid">
+          <article class="card season-card">
+            <h3 class="card-title">봄</h3>
+            <p class="body-text">
+              겨울 동안 얼어 있던 땅이 서서히 풀리고,  
+              작은 새싹들이 얼굴을 내밉니다.
+              오래된 집 안에도, 혜원의 마음에도
+              조금씩 새로운 온기가 스며듭니다.
+            </p>
+          </article>
+          <article class="card season-card">
+            <h3 class="card-title">여름</h3>
+            <p class="body-text">
+              햇빛이 강해질수록 텃밭의 작물도 빠르게 자랍니다.
+              뜨거운 날씨만큼이나 마음도 쉽게 지치지만,
+              시원한 음식과 강가의 바람이 그 피로를 덜어줍니다.
+            </p>
+          </article>
+          <article class="card season-card">
+            <h3 class="card-title">가을</h3>
+            <p class="body-text">
+              수확의 계절.  
+              손수 키운 재료를 한 번 더 정성스럽게 손질해서
+              겨울까지 버틸 수 있는 음식으로 바꾸는 시간입니다.
+            </p>
+          </article>
+          <article class="card season-card">
+            <h3 class="card-title">겨울</h3>
+            <p class="body-text">
+              눈이 쌓이고, 바깥일은 줄어들지만  
+              오히려 집 안의 시간이 더 풍성해집니다.
+              따뜻한 국물과 구수한 밥 냄새가
+              고요한 계절을 채워줍니다.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- RECIPES / FOOD -->
+    <section id="recipes" class="section section-dark reveal">
+      <div class="section-inner">
+        <h2 class="section-title">Food & Table</h2>
+        <p class="section-tagline">
+          화려하진 않지만, 오늘을 버틸 수 있게 해주는 한 끼.
+        </p>
+        <div class="card-grid">
+          <article class="card">
+            <h3 class="card-title">계절 밥상</h3>
+            <p class="body-text">
+              영화 속 음식들은 특별한 레시피라기보다,
+              그 계절에 구할 수 있는 재료를 모아 정성스럽게 만든 밥상입니다.
+              간단하지만, 그 안에 들어 있는 시간과 마음이
+              한 끼를 조금 더 소중하게 만듭니다.
+            </p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">손이 가는 일</h3>
+            <p class="body-text">
+              채소를 씻고, 자르고, 불을 올리고, 기다리는 일.
+              반복되는 과정 속에서 생각이 정리되기도 하고,
+              잠시 복잡한 마음에서 벗어날 수 있기도 합니다.
+            </p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">혼자 먹는 밥, 함께 먹는 밥</h3>
+            <p class="body-text">
+              혼자 먹는 밥상은 조용하지만, 마음을 다독이는 시간이 됩니다.
+              가끔은 친구들과 함께 나누는 식사가
+              고향과 일상을 더 따뜻하게 느끼게 해줍니다.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHARACTERS -->
+    <section id="characters" class="section reveal">
+      <div class="section-inner">
+        <h2 class="section-title">Characters</h2>
+        <p class="section-tagline">
+          같은 마을, 다른 고민, 비슷한 온도.
+        </p>
+        <div class="card-grid">
+          <article class="card">
+            <h3 class="card-title">혜원</h3>
+            <p class="card-subtitle">도시를 떠나 고향으로 돌아온 주인공</p>
+            <p class="body-text">
+              시험과 취업, 인간관계에 지쳐 잠시 숨을 고르기 위해
+              고향 집으로 돌아옵니다.
+              밥을 짓고, 밭을 일구고, 계절을 통과해 나가면서
+              스스로에게 솔직해지는 법을 배워갑니다.
+            </p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">친구들</h3>
+            <p class="card-subtitle">각자의 자리에서 버티고 있는 청춘들</p>
+            <p class="body-text">
+              도시와 시골, 각자 다른 선택을 했지만
+              결국 ‘잘 살고 싶다’는 마음은 같습니다.
+              함께 웃고, 농담하고, 때로는 진지하게 고민을 나누며
+              서로의 일상을 지탱해 줍니다.
+            </p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">마을과 집</h3>
+            <p class="card-subtitle">말 없이 곁을 지켜주는 배경</p>
+            <p class="body-text">
+              오래된 집, 텃밭, 산과 들, 동네 가게까지.
+              사람은 아니지만, 이 공간들 역시
+              혜원의 이야기를 함께 만들어 가는 등장인물처럼 느껴집니다.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- THEMES -->
+    <section id="themes" class="section section-intro reveal">
+      <div class="section-inner narrow">
+        <h2 class="section-title">Themes</h2>
+        <p class="section-tagline">
+          도망과 휴식, 일과 밥, 그리고 다시 살아가는 힘.
+        </p>
+        <p class="body-text">
+          <em>리틀 포레스트</em>는 거창한 성공 이야기가 아니라,
+          하루를 무너뜨리지 않고 버티게 해주는 작은 루틴에 대해 말합니다.
+          잘 살고 있는 건지, 혹시 도망치고 있는 건 아닌지
+          스스로에게 계속 묻게 되지만,
+          그 질문조차도 결국은 앞으로 나아가기 위한 과정입니다.
+        </p>
+        <p class="body-text">
+          이 영화는 정답을 내리지 않습니다.
+          대신 밥 한 끼를 다 먹고 나서, 따뜻한 그릇을 내려놓는 순간처럼  
+          조금은 나를 이해하게 되는 마음을 남겨줍니다.
+        </p>
+      </div>
+    </section>
+
+    <!-- OST -->
+    <section id="ost" class="section section-dark reveal">
+      <div class="section-inner narrow">
+        <h2 class="section-title">Music & Sound</h2>
+        <p class="section-tagline">
+          바람 소리, 흙 냄새, 조용한 음악.
+        </p>
+        <p class="body-text">
+          영화의 음악은 아주 크지 않지만,
+          풍경과 마음의 온도를 살짝 더해주는 역할을 합니다.
+          작은 기타 소리, 잔잔한 피아노, 자연의 소리가 섞여
+          화면 밖에서도 한동안 여운이 남습니다.
+        </p>
+        <div class="ost-embed">
+          <!-- 여기 YouTube / Spotify 플레이리스트를 iframe으로 삽입해도 좋음 -->
+          <div class="ost-placeholder">
+            이 영역에 리틀 포레스트 관련 OST 플레이리스트를 임베드하거나,  
+            직접 만든 플레이리스트 링크를 넣어보세요.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CREDITS -->
+    <section id="credits" class="section section-credits reveal">
+      <div class="section-inner narrow">
+        <h2 class="section-title">Credits & Note</h2>
+        <p class="body-text">
+          이 페이지는 상업적 목적이 아닌, 대학교 웹 프로그래밍 과제용으로 제작된  
+          비공식 팬/홍보 웹사이트입니다. 영화의 모든 권리는 원저작권자 및 배급사에 있습니다.
+        </p>
+        <ul class="credit-list">
+          <li><span class="label">영화 제목</span> 리틀 포레스트 (Little Forest)</li>
+          <li><span class="label">감독</span> 임순례</li>
+          <li><span class="label">원작</span> 이가라시 다이스케의 만화 &lt;리틀 포레스트&gt;</li>
+          <li><span class="label">주연</span> 배우 김태리 외</li>
+        </ul>
+        <p class="body-text subtle">
+          디자인, 마크업, 인터랙션 구조는 니콘 시네마틱 웹페이지의 레이아웃을 참고하여  
+          리틀 포레스트의 사계절 감성에 맞게 재구성한 것입니다.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2025 Little Forest · Student Web Project</p>
+  </footer>
+</body>
+</html>
