@@ -16,7 +16,7 @@
   --border-soft: rgba(255, 255, 255, 0.15);
   --max-width: 1120px;
   --transition-fast: 0.2s ease;
-  --transition-slow: 0.6s ease;
+  --transition-slow: 0.65s cubic-bezier(0.23, 0.82, 0.23, 0.99);
   --radius-lg: 18px;
   --radius-md: 12px;
 }
@@ -25,11 +25,13 @@ html,
 body {
   margin: 0;
   padding: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    "Noto Sans KR", sans-serif;
+  font-family: "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  font-weight: 300;
   background: radial-gradient(circle at top, #1a2719, #050a06 60%);
   color: var(--text-main);
   scroll-behavior: smooth;
+  line-height: 1.7;
 }
 
 /* 🔊 SOUND GATE MODAL */
@@ -37,7 +39,7 @@ body {
 .sound-gate {
   position: fixed;
   inset: 0;
-  background: radial-gradient(circle at top, rgba(0, 0, 0, 0.8), #020503);
+  background: radial-gradient(circle at top, rgba(0, 0, 0, 0.82), #020503);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -52,7 +54,7 @@ body {
 
 .sound-gate-panel {
   background: rgba(6, 12, 7, 0.96);
-  border-radius: 20px;
+  border-radius: 24px;
   padding: 28px 26px 22px;
   border: 1px solid var(--border-soft);
   max-width: 360px;
@@ -62,7 +64,7 @@ body {
 }
 
 .sound-gate-label {
-  font-size: 12px;
+  font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--text-sub);
@@ -72,6 +74,7 @@ body {
 .sound-gate-title {
   font-size: 18px;
   margin-bottom: 18px;
+  font-family: "Noto Serif KR", "Noto Sans KR", system-ui, sans-serif;
 }
 
 .sound-gate-actions {
@@ -84,7 +87,7 @@ body {
 .gate-btn {
   border-radius: 999px;
   padding: 8px 18px;
-  font-size: 13px;
+  font-size: 12px;
   cursor: pointer;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -139,9 +142,10 @@ body {
 }
 
 .logo {
-  font-size: 18px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
+  font-size: 19px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  font-family: "Noto Serif KR", "Noto Sans KR", system-ui, sans-serif;
 }
 
 .main-nav {
@@ -154,14 +158,16 @@ body {
 .main-nav a {
   text-decoration: none;
   color: var(--text-sub);
-  padding: 4px 6px;
+  padding: 4px 8px;
   border-radius: 999px;
-  transition: background var(--transition-fast), color var(--transition-fast);
+  transition: background var(--transition-fast), color var(--transition-fast),
+    transform var(--transition-fast);
 }
 
 .main-nav a:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.1);
   color: var(--text-main);
+  transform: translateY(-1px);
 }
 
 .sound-toggle {
@@ -175,13 +181,14 @@ body {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   transition: background var(--transition-fast), color var(--transition-fast),
-    border-color var(--transition-fast);
+    border-color var(--transition-fast), transform var(--transition-fast);
 }
 
 .sound-toggle.on {
   background: var(--accent-soft);
   color: var(--accent);
   border-color: var(--accent);
+  transform: translateY(-1px);
 }
 
 /* SECTION BASE */
@@ -208,23 +215,27 @@ body {
 }
 
 .section-title {
-  font-size: 26px;
+  font-size: 24px;
   margin-bottom: 8px;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
+  font-family: "Noto Serif KR", "Noto Sans KR", system-ui, sans-serif;
+  font-weight: 500;
 }
 
 .section-tagline {
   font-size: 14px;
   color: var(--text-sub);
-  margin-bottom: 22px;
+  margin-bottom: 20px;
+  font-weight: 300;
 }
 
 .body-text {
   font-size: 14px;
   color: var(--text-main);
-  line-height: 1.8;
-  margin-bottom: 12px;
+  line-height: 1.9;
+  margin-bottom: 10px;
+  font-weight: 300;
 }
 
 .body-text.subtle {
@@ -244,25 +255,16 @@ body {
   background-image: linear-gradient(
       145deg,
       rgba(10, 18, 11, 0.9),
-      rgba(10, 18, 11, 0.5),
-      rgba(3, 6, 4, 0.95)
+      rgba(10, 18, 11, 0.55),
+      rgba(3, 6, 4, 0.96)
     ),
     radial-gradient(circle at top, #243526, #050a06 60%);
-}
-
-.hero-video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: saturate(1.05) contrast(1.05) brightness(0.9);
 }
 
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at top, rgba(0, 0, 0, 0.3), transparent);
+  background: radial-gradient(circle at top, rgba(0, 0, 0, 0.35), transparent);
 }
 
 .hero-content {
@@ -282,17 +284,19 @@ body {
 
 .hero-kicker {
   font-size: 12px;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--text-sub);
   margin-bottom: 10px;
 }
 
 .hero-title {
-  font-size: 40px;
+  font-size: 38px;
   margin: 0 0 8px;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
+  font-family: "Noto Serif KR", "Noto Sans KR", system-ui, sans-serif;
+  font-weight: 500;
 }
 
 .hero-subtitle {
@@ -312,10 +316,10 @@ body {
 .ghost-btn {
   border-radius: 999px;
   padding: 10px 20px;
-  font-size: 13px;
+  font-size: 12px;
   border: none;
   cursor: pointer;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   transition: background var(--transition-fast), color var(--transition-fast),
     transform var(--transition-fast), box-shadow var(--transition-fast);
@@ -345,11 +349,12 @@ body {
 .hero-badge {
   align-self: flex-end;
   padding: 16px 20px;
-  border-radius: 16px;
-  background: rgba(6, 12, 7, 0.9);
+  border-radius: 20px;
+  background: rgba(6, 12, 7, 0.92);
   border: 1px solid var(--border-soft);
   box-shadow: 0 18px 35px rgba(0, 0, 0, 0.5);
   min-width: 220px;
+  backdrop-filter: blur(10px);
 }
 
 .badge-label {
@@ -363,6 +368,7 @@ body {
   display: block;
   font-size: 18px;
   margin-top: 4px;
+  font-family: "Noto Serif KR", "Noto Sans KR", system-ui, sans-serif;
 }
 
 .badge-meta {
@@ -561,7 +567,6 @@ body {
       center/cover no-repeat,
     #050a06;
   filter: saturate(1.1) brightness(0.85);
-  transform: translateY(0);
 }
 
 .food-overlay {
@@ -682,17 +687,45 @@ body {
   background: #020402;
 }
 
-/* REVEAL ANIMATION */
+/* REVEAL / MORPH ANIMATION */
 
 .reveal {
   opacity: 0;
-  transform: translateY(26px);
-  transition: opacity var(--transition-slow), transform var(--transition-slow);
+  transform: translateY(28px) scale(0.97);
+  filter: blur(6px);
+  transition: opacity var(--transition-slow), transform var(--transition-slow),
+    filter var(--transition-slow);
+  transform-origin: center top;
 }
 
 .reveal.is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
+/* 카드류 hover 모핑 */
+
+.card,
+.season-card,
+.themes-panel,
+.hero-badge,
+.image-placeholder,
+.video-frame,
+.ost-placeholder {
+  transition: transform 0.35s ease-out, box-shadow 0.35s ease-out,
+    border-radius 0.35s ease-out, background 0.35s ease-out;
+}
+
+.card:hover,
+.season-card:hover,
+.themes-panel:hover,
+.hero-badge:hover,
+.image-placeholder:hover,
+.video-frame:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 40px rgba(0, 0, 0, 0.6);
+  border-radius: 24px;
 }
 
 /* RESPONSIVE */
@@ -727,7 +760,7 @@ body {
     padding: 64px 16px;
   }
   .hero-title {
-    font-size: 32px;
+    font-size: 30px;
   }
   .hero-content {
     padding: 32px 16px;
