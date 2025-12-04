@@ -17,6 +17,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const gateSoundOn = document.getElementById("gateSoundOn");
   const gateSoundOff = document.getElementById("gateSoundOff");
 
+  if (bgAudio) {
+  bgAudio.volume = 0.4; // 0 ~ 1 사이 값, 원하면 조절
+}
+
   let isPlaying = false;
 
   const updateSoundUI = () => {
