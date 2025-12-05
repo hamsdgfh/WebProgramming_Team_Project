@@ -34,12 +34,16 @@ body {
   line-height: 1.7;
 }
 
+body.no-scroll {
+  overflow: hidden;
+}
+
 /* 🔊 SOUND GATE MODAL */
 
 .sound-gate {
   position: fixed;
   inset: 0;
-  background: radial-gradient(circle at top, rgba(0, 0, 0, 0.82), #020503);
+  background: #000;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -53,7 +57,7 @@ body {
 }
 
 .sound-gate-panel {
-  background: rgba(6, 12, 7, 0.96);
+  background: #050a06;
   border-radius: 24px;
   padding: 28px 26px 22px;
   border: 1px solid var(--border-soft);
@@ -85,6 +89,9 @@ body {
 }
 
 .gate-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   border-radius: 999px;
   padding: 8px 18px;
   font-size: 12px;
@@ -93,7 +100,8 @@ body {
   text-transform: uppercase;
   border: none;
   transition: background var(--transition-fast), color var(--transition-fast),
-    box-shadow var(--transition-fast), transform var(--transition-fast);
+    box-shadow var(--transition-fast), transform var(--transition-fast),
+    border-color var(--transition-fast);
 }
 
 .gate-btn-primary {
@@ -117,9 +125,64 @@ body {
   background: rgba(255, 255, 255, 0.06);
 }
 
+.gate-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  border: 1px solid var(--border-soft);
+}
+
+.gate-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.gate-text {
+  font-size: 11px;
+}
+
 .sound-gate-note {
   font-size: 11px;
   color: var(--text-sub);
+}
+
+/* ✨ INTRO OVERLAY (문장만 보이는 단계) */
+
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 1.2s ease, background 1.2s ease;
+}
+
+.intro-overlay__text {
+  font-family: "Noto Serif KR", "Noto Sans KR", system-ui, sans-serif;
+  font-size: 20px;
+  color: var(--text-main);
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 1s ease, transform 1s ease;
+  text-align: center;
+  padding: 0 24px;
+}
+
+.intro-overlay.show-text .intro-overlay__text {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.intro-overlay.fade-out {
+  opacity: 0;
+  background: rgba(0, 0, 0, 0);
 }
 
 /* HEADER */
@@ -127,7 +190,7 @@ body {
 .site-header {
   position: sticky;
   top: 0;
-  z-index: 50;
+  z-index: 10;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -135,7 +198,7 @@ body {
   background: linear-gradient(
     to bottom,
     rgba(5, 10, 6, 0.96),
-    rgba(5, 10, 6, 0.85),
+    rgba(5, 10, 6, 0.75),
     transparent
   );
   backdrop-filter: blur(12px);
@@ -247,35 +310,50 @@ body {
 
 .hero {
   position: relative;
-  min-height: 90vh;
+  min-height: 100vh;
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
   overflow: hidden;
-  background-image: linear-gradient(
-      145deg,
-      rgba(10, 18, 11, 0.9),
-      rgba(10, 18, 11, 0.55),
-      rgba(3, 6, 4, 0.96)
-    ),
-    radial-gradient(circle at top, #243526, #050a06 60%);
+}
+
+.hero-video-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: -2;
+}
+
+.hero-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(1.1) brightness(0.9);
 }
 
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at top, rgba(0, 0, 0, 0.35), transparent);
+  background: radial-gradient(circle at top, rgba(0, 0, 0, 0.35), transparent),
+    linear-gradient(
+      to bottom,
+      rgba(3, 6, 4, 0.9),
+      rgba(3, 6, 4, 0.35),
+      rgba(3, 6, 4, 0.96)
+    );
+  z-index: -1;
 }
 
 .hero-content {
   position: relative;
-  z-index: 2;
+  z-index: 1;
   max-width: var(--max-width);
   width: 100%;
   display: flex;
   justify-content: space-between;
   gap: 24px;
-  padding: 40px 20px;
+  padding: 80px 20px 64px;
+  align-items: center;
 }
 
 .hero-text-block {
@@ -420,7 +498,7 @@ body {
   }
 }
 
-/* SPLIT SECTION (ABOUT / CHARACTERS) */
+/* SPLIT SECTION */
 
 .section-split {
   background: radial-gradient(circle at top, #1a2719, #050a06 60%);
@@ -445,6 +523,8 @@ body {
   min-height: 260px;
 }
 
+/* IMAGE PLACEHOLDER들 – 나중에 이미지로 교체 */
+
 .image-placeholder {
   width: 100%;
   height: 100%;
@@ -457,6 +537,18 @@ body {
   position: relative;
   overflow: hidden;
   box-shadow: 0 22px 40px rgba(0, 0, 0, 0.55);
+}
+
+.image-placeholder--character {
+  background: url("https://images.pexels.com/photos/1183266/pexels-photo-1183266.jpeg?auto=compress&cs=tinysrgb&w=1200")
+      center/cover no-repeat,
+    rgba(10, 18, 11, 0.9);
+}
+
+.image-placeholder--director {
+  background: url("https://images.pexels.com/photos/6898859/pexels-photo-6898859.jpeg?auto=compress&cs=tinysrgb&w=1200")
+      center/cover no-repeat,
+    rgba(10, 18, 11, 0.9);
 }
 
 .image-placeholder .img-caption {
@@ -512,7 +604,7 @@ body {
   display: flex;
   gap: 18px;
   overflow-x: auto;
-  padding: 8px 0 12px;
+  padding: 8px 20px 12px;
   scroll-snap-type: x mandatory;
 }
 
@@ -550,69 +642,10 @@ body {
   margin: 0 auto;
   font-size: 11px;
   color: var(--text-sub);
+  padding: 0 20px;
 }
 
-/* FOOD – FULL BLEED BACKGROUND */
-
-.section-food {
-  position: relative;
-  padding: 110px 20px;
-  overflow: hidden;
-}
-
-.food-bg {
-  position: absolute;
-  inset: 0;
-  background: url("https://images.pexels.com/photos/3730951/pexels-photo-3730951.jpeg?auto=compress&cs=tinysrgb&w=1200")
-      center/cover no-repeat,
-    #050a06;
-  filter: saturate(1.1) brightness(0.85);
-}
-
-.food-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    120deg,
-    rgba(5, 10, 6, 0.9),
-    rgba(5, 10, 6, 0.3),
-    rgba(5, 10, 6, 0.95)
-  );
-}
-
-.food-inner {
-  position: relative;
-  z-index: 2;
-}
-
-.food-text {
-  max-width: 520px;
-}
-
-/* STACK BLOCK (CHARACTERS/THEMES) */
-
-.stack-block {
-  margin-bottom: 18px;
-}
-
-.stack-title {
-  font-size: 16px;
-  margin-bottom: 4px;
-}
-
-.themes-panel {
-  padding: 18px 18px 16px;
-  border-radius: 20px;
-  border: 1px solid var(--border-soft);
-  background: rgba(6, 12, 7, 0.96);
-  box-shadow: 0 18px 35px rgba(0, 0, 0, 0.5);
-}
-
-/* MEDIA SECTION */
-
-.section-media {
-  background: radial-gradient(circle at top, #141f15, #020403 70%);
-}
+/* MEDIA SECTION / CAST 인트로 */
 
 .media-row {
   display: grid;
@@ -643,22 +676,113 @@ body {
   height: 100%;
 }
 
-/* OST PLACEHOLDER */
+/* STACK BLOCK */
 
-.ost-embed {
-  margin-top: 12px;
+.stack-block {
+  margin-bottom: 18px;
 }
 
-.ost-placeholder {
-  padding: 18px;
-  border-radius: 18px;
-  border: 1px dashed var(--border-soft);
-  background: rgba(8, 16, 8, 0.6);
+.stack-title {
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+/* GALLERY STRIP (사진 6~7 느낌) */
+
+.gallery-strip {
+  display: flex;
+  min-height: 320px;
+  height: 60vh;
+  max-height: 520px;
+  overflow: hidden;
+}
+
+.gallery-item {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  transition: flex 0.6s ease, filter 0.6s ease;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.gallery-item:not(.active) {
+  filter: grayscale(0.3) brightness(0.8);
+}
+
+.gallery-image {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.6s ease;
+}
+
+.gallery-image--spring {
+  background-image: url("https://images.pexels.com/photos/773594/pexels-photo-773594.jpeg?auto=compress&cs=tinysrgb&w=1200");
+}
+.gallery-image--summer {
+  background-image: url("https://images.pexels.com/photos/176381/pexels-photo-176381.jpeg?auto=compress&cs=tinysrgb&w=1200");
+}
+.gallery-image--autumn {
+  background-image: url("https://images.pexels.com/photos/33109/fall-autumn-red-season.jpg?auto=compress&cs=tinysrgb&w=1200");
+}
+.gallery-image--winter {
+  background-image: url("https://images.pexels.com/photos/4457307/pexels-photo-4457307.jpeg?auto=compress&cs=tinysrgb&w=1200");
+}
+
+.gallery-item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.8),
+    rgba(0, 0, 0, 0.25),
+    transparent
+  );
+}
+
+.gallery-label {
+  position: relative;
+  z-index: 1;
+  font-size: 42px;
+  font-weight: 400;
+  margin-left: 20px;
+  margin-bottom: 6px;
+  font-family: "Noto Serif KR", "Noto Sans KR", system-ui, sans-serif;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.6);
+}
+
+.gallery-caption {
+  position: relative;
+  z-index: 1;
   font-size: 13px;
-  color: var(--text-sub);
+  color: var(--text-main);
+  margin-left: 22px;
+  margin-bottom: 18px;
+  letter-spacing: 0.18em;
 }
 
-/* CREDITS */
+.gallery-item.active {
+  flex: 2.4;
+  filter: none;
+}
+
+.gallery-item.active .gallery-image {
+  transform: scale(1.05);
+}
+
+.gallery-item.active .gallery-label {
+  color: #fff;
+  -webkit-text-stroke: 0;
+}
+
+/* CREDITS / DIRECTOR */
 
 .credit-list {
   list-style: none;
@@ -706,20 +830,15 @@ body {
 
 /* 카드류 hover 모핑 */
 
-.card,
 .season-card,
-.themes-panel,
 .hero-badge,
 .image-placeholder,
-.video-frame,
-.ost-placeholder {
+.video-frame {
   transition: transform 0.35s ease-out, box-shadow 0.35s ease-out,
     border-radius 0.35s ease-out, background 0.35s ease-out;
 }
 
-.card:hover,
 .season-card:hover,
-.themes-panel:hover,
 .hero-badge:hover,
 .image-placeholder:hover,
 .video-frame:hover {
@@ -753,6 +872,9 @@ body {
   .media-row {
     grid-template-columns: 1fr;
   }
+  .gallery-strip {
+    height: 360px;
+  }
 }
 
 @media (max-width: 640px) {
@@ -763,7 +885,7 @@ body {
     font-size: 30px;
   }
   .hero-content {
-    padding: 32px 16px;
+    padding: 72px 16px 56px;
   }
   .main-nav {
     font-size: 12px;
@@ -772,5 +894,8 @@ body {
   .hero-badge {
     min-width: auto;
     width: 100%;
+  }
+  .gallery-label {
+    font-size: 32px;
   }
 }
