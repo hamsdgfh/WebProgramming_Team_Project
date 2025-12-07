@@ -321,7 +321,7 @@ body.no-scroll {
   position: absolute;
   inset: 0;
   overflow: hidden;
-  z-index: -2;
+  z-index: 0;
 }
 
 .hero-video {
@@ -341,7 +341,7 @@ body.no-scroll {
       rgba(3, 6, 4, 0.35),
       rgba(3, 6, 4, 0.96)
     );
-  z-index: -1;
+  z-index: 1;
 }
 
 .hero-content {
