@@ -72,13 +72,16 @@ body.no-scroll {
   font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--text-sub);
-  margin-bottom: 6px;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 10px;
 }
 
 .sound-gate-title {
-  font-size: 18px;
-  margin-bottom: 18px;
+  font-size: 20px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin-bottom: 16px;
   font-family: "Noto Serif KR", "Noto Sans KR", system-ui, sans-serif;
 }
 
@@ -146,8 +149,9 @@ body.no-scroll {
 }
 
 .sound-gate-note {
-  font-size: 11px;
-  color: var(--text-sub);
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 28px;
 }
 
 /* ✨ INTRO OVERLAY (문장만 보이는 단계) */
