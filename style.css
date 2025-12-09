@@ -294,6 +294,119 @@ body.no-scroll {
   max-width: 780px;
 }
 
+/* PANEL SECTION (Nikon 스타일 참고) */
+
+.section-panel {
+  position: relative;
+  padding: 96px 20px 90px;
+  background: #000; /* 전체 배경은 완전 검정 */
+}
+
+.panel-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  border-radius: 28px;
+  padding: 40px 32px 34px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(0, 0, 0, 0.78);
+  backdrop-filter: blur(22px);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 스크롤 리빌은 기존 .reveal 클래스를 그대로 활용 */
+.panel-inner.reveal {
+  /* .reveal 기본값 + 약간 더 부드러운 느낌만 주고 싶으면 여기에 옵션 추가 가능 */
+}
+
+.panel-tag {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-sub);
+  margin-bottom: 10px;
+}
+
+.panel-title-big {
+  font-family: "Noto Serif KR", "Noto Sans KR", system-ui, sans-serif;
+  font-size: 30px;
+  margin: 0 0 6px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.panel-lead {
+  font-size: 14px;
+  color: var(--text-sub);
+  max-width: 520px;
+  margin: 14px 0 26px;
+}
+
+.panel-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+}
+
+.panel-item {
+  flex: 1 1 220px;
+}
+
+.panel-item-title {
+  font-size: 14px;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.panel-item-text {
+  font-size: 13px;
+  color: var(--text-main);
+  line-height: 1.8;
+}
+
+/* 아래에서 위로 천천히 올라오는 블러 레이어 */
+.panel-blur {
+  position: absolute;
+  left: -10%;
+  right: -10%;
+  bottom: -40%;
+  height: 70%;
+  background:
+    radial-gradient(circle at 10% 120%, rgba(255, 255, 255, 0.35), transparent 55%),
+    radial-gradient(circle at 90% 120%, rgba(255, 255, 255, 0.22), transparent 55%);
+  opacity: 0.15;
+  filter: blur(24px);
+  pointer-events: none;
+  transform: translateY(40px);
+  transition: opacity var(--transition-slow), transform var(--transition-slow);
+}
+
+/* 패널이 화면에 들어오면 블러가 위로 올라오며 진해짐 */
+.panel-inner.is-visible .panel-blur {
+  opacity: 0.55;
+  transform: translateY(0);
+}
+
+/* 반응형 살짝 정리 */
+@media (max-width: 640px) {
+  .section-panel {
+    padding: 72px 16px 68px;
+  }
+
+  .panel-inner {
+    padding: 28px 20px 26px;
+    border-radius: 22px;
+  }
+
+  .panel-title-big {
+    font-size: 24px;
+  }
+
+  .panel-row {
+    flex-direction: column;
+  }
+}
+
 .section-title {
   font-size: 24px;
   margin-bottom: 8px;
