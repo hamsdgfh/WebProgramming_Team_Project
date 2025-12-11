@@ -124,24 +124,45 @@ document.addEventListener("DOMContentLoaded", () => {
     y: "30%" // 배경이 텍스트보다 천천히 내려가서 깊이감 형성
   });
 
-  // 6. Cinematic Cast Animation (Snap Compatible)
+  // 6. Cinematic Cast Animation (UI 고정 + 우측 정렬)
   const castPanels = document.querySelectorAll(".cast-panel");
 
-  // 각 패널에 스크롤 트리거 설정
   castPanels.forEach((panel) => {
-    ScrollTrigger.create({
-      trigger: panel,
-      // 중요: scroller를 cast-container로 지정해야 snap과 충돌하지 않음
-      // 만약 전체 페이지 스크롤이라면 scroller 설정 필요없음. 
-      // 현재 구조상 window 스크롤을 감지하도록 설정함.
-      start: "top center", 
-      end: "bottom center",
-      
-      // 화면 중앙에 오면 active 클래스를 붙임 -> CSS 애니메이션 작동
-      onEnter: () => panel.classList.add("active"),
-      onEnterBack: () => panel.classList.add("active"),
-      onLeave: () => panel.classList.remove("active"),
-      onLeaveBack: () => panel.classList.remove("active"),
+    const quote = panel.querySelector(".initial-quote");
+    const introContent = panel.querySelector(".intro-content");
+    const introThumbnail = panel.querySelector(".intro-thumbnail");
+    const blurPanel = panel.querySelector(".detail-blur-panel");
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: panel,
+        start: "top top",
+        end: "+=250%", 
+        pin: true,     
+        scrub: 1,      
+        anticipatePin: 1
+      }
     });
+
+    tl
+      // [1] 대사 등장
+      .to(quote, { opacity: 1, duration: 1 })
+      
+      // [2] 대사 유지
+      .to(quote, { duration: 1 }) 
+      
+      // [3] 대사 사라짐 & 왼쪽 UI(intro) 등장
+      .to(quote, { opacity: 0, duration: 1 }, "step2")
+      .to(introContent, { opacity: 1, y: 0, duration: 1 }, "step2")
+      .to(introThumbnail, { opacity: 1, y: 0, duration: 1 }, "step2")
+      
+      // [4] 왼쪽 UI 유지 (스크롤 내리는 동안 감상)
+      .to(introContent, { duration: 1 })
+      
+      // [5] 블러 패널 올라옴 (왼쪽 UI 사라지는 코드 없음 - 고정됨)
+      .to(blurPanel, { transform: "translateY(0%)", duration: 2, ease: "power2.inOut" }, "step3")
+      
+      // [6] 마지막 상태 유지
+      .to(blurPanel, { duration: 2 });
   });
 });
