@@ -2,427 +2,399 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <title>LITTLE FOREST</title>
+    <title>LITTLE FOREST | 잠시 쉬어가도 괜찮아</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- 폰트 -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&family=Noto+Serif+KR:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&family=Noto+Serif+KR:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
 
     <link rel="stylesheet" href="style.css" />
     <script defer src="script.js"></script>
   </head>
   <body class="no-scroll">
-    <!-- 🔊 BGM -->
     <audio id="bgAudio" loop>
-      <!-- mp3 파일을 여기에 연결 -->
-      <!-- 예: assets/audio/bgm.mp3 -->
       <source src="assets/audio/little-forest-bgm.mp3" type="audio/mpeg" />
     </audio>
 
-    <!-- 🔊 입장 사운드 게이트 -->
     <div class="sound-gate" id="soundGate">
       <div class="sound-gate-panel">
-        <div class="sound-gate-label">WELCOME</div>
-        <div class="sound-gate-title">SOUND</div>
-        <p class="sound-gate-note">이 웹사이트는 배경 음악이 재생됩니다.</p>
-
-        <div class="sound-gate-actions">
-          <button class="gate-btn gate-btn-primary" id="gateSoundOn">
-            <span class="gate-icon">
-              <!-- 스피커 ON 아이콘 (단순 SVG) -->
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  d="M4 9v6h4l5 4V5L8 9H4z"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.6"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M16 9.5a3 3 0 010 5"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.6"
-                  stroke-linecap="round"
-                />
-                <path
-                  d="M18 7a5.5 5.5 0 010 10"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.6"
-                  stroke-linecap="round"
-                />
-              </svg>
-            </span>
-            <span class="gate-text">ON</span>
-          </button>
-
-          <button class="gate-btn gate-btn-ghost" id="gateSoundOff">
-            <span class="gate-icon">
-              <!-- 스피커 OFF 아이콘 -->
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  d="M4 9v6h4l5 4V5L8 9H4z"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.6"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M16 9l4 4m0-4l-4 4"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.6"
-                  stroke-linecap="round"
-                />
-              </svg>
-            </span>
-            <span class="gate-text">OFF</span>
-          </button>
+        <div class="gate-logo">LITTLE FOREST</div>
+        <p class="gate-desc">
+          이 웹사이트는 배경 음악이 재생됩니다.
+        </p>
+        <div class="gate-actions">
+          <button class="gate-btn primary" id="gateSoundOn">소리 켜고 입장</button>
+          <button class="gate-btn ghost" id="gateSoundOff">조용히 입장</button>
         </div>
       </div>
     </div>
 
-    <!-- ✨ 사운드 선택 후, 검정 배경 + 문장 단계 -->
     <div class="intro-overlay" id="introOverlay">
-      <div class="intro-overlay__text">
-        인생은 긴 겨울 같지만, 언젠가 봄이 오겠지.
+      <div class="intro-text">
+        <span class="line">나만 돌아왔다. 아무것도 찾지 못한 채..</span>
       </div>
     </div>
 
-    <!-- HEADER -->
     <header class="site-header">
-      <div class="logo">LITTLE FOREST</div>
-
+      <a href="#home" class="logo">LITTLE FOREST</a>
       <nav class="main-nav">
-        <a href="#home" data-scroll="#home">HOME</a>
-        <a href="#story" data-scroll="#story">STORY</a>
-        <a href="#cast" data-scroll="#cast">CAST</a>
-        <a href="#gallery" data-scroll="#gallery">GALLERY</a>
-        <a href="#director" data-scroll="#director">DIRECTOR</a>
+        <a href="#story">STORY</a>
+        <a href="#cooking">COOKING</a>
+        <a href="#cast">CAST</a>
+        <a href="#gallery">GALLERY</a>
       </nav>
-
-      <button class="sound-toggle" id="soundToggle">SOUND OFF</button>
+      <button class="sound-toggle" id="soundToggle">
+        <span class="sound-icon">♪</span>
+        <span class="sound-status">OFF</span>
+      </button>
     </header>
 
-    <main>
-      <!-- HERO / HOME -->
+    <main id="main-content">
       <section id="home" class="hero">
-        <!-- 배경 영상 -->
-        <div class="hero-video-bg">
+        <div class="hero-bg">
           <video
-            id="heroVideo"
             class="hero-video"
             autoplay
             muted
             loop
             playsinline
-            controls
           >
-            <!-- 나중에 리틀 포레스트 관련 영상으로 교체 -->
             <source src="https://github.com/hamsdgfh/WebProgramming_Team_Project/releases/download/video_upload/forest-loop.mp4" type="video/mp4" />
           </video>
         </div>
-
         <div class="hero-overlay"></div>
-
+        
         <div class="hero-content">
-          <div class="hero-text-block reveal">
-            <div class="hero-kicker">FILM WEBSITE</div>
-            <h1 class="hero-title">LITTLE FOREST</h1>
-            <p class="hero-subtitle">
-              나만 돌아왔다. 아무것도 찾지 못한 채.
+          <div class="hero-inner" data-anim="fade-up">
+            <div class="hero-kicker">CINEMATIC ARCHIVE</div>
+            <h1 class="hero-title">LITTLE<br>FOREST</h1>
+            <p class="hero-desc">
+              도망치듯 돌아온 고향에서,<br>오늘도 따뜻한 밥을 짓습니다.
             </p>
-
-            <div class="hero-actions">
-              <button
-                class="primary-btn"
-                type="button"
-                data-scroll="#story"
-              >
-                이야기 보기
-              </button>
-              <button
-                class="ghost-btn"
-                type="button"
-                data-scroll="#gallery"
-              >
-                스틸컷 보기
-              </button>
-            </div>
           </div>
-
-          <aside class="hero-badge reveal">
-            <span class="badge-label">BGM</span>
-            <span class="badge-title">Strolling (걷는 마음)</span>
-            <span class="badge-meta">Yoongjin(융진)</span>
-          </aside>
         </div>
 
-        <div class="scroll-indicator" data-scroll="#story">
-          <span>SCROLL</span>
-          <div class="scroll-line"></div>
+        <div class="scroll-ind">
+          <span class="txt">SCROLL</span>
+          <span class="line"></span>
         </div>
       </section>
 
-      <!-- STORY / ABOUT -->
-            <!-- PANEL SECTION : 흐릿한 블러가 올라오는 소개 영역 -->
-      <section class="section section-panel">
-        <div class="panel-inner reveal">
-          <div class="panel-tag">ABOUT</div>
-          <h2 class="panel-title-big">리틀 포레스트, 어떤 영화인가요?</h2>
-          <p class="panel-lead">
-            거창한 사건 대신, 밥을 짓고 먹는 하루하루를 따라가는 영화.
-            도시에서 지친 혜원이 고향으로 돌아와 사계절을 통과하며
-            숨을 고르는 시간을 그립니다.
+      <section id="story" class="section pin-section">
+        <div class="pin-container">
+          <div class="pin-left">
+            <div class="pin-content">
+              <span class="sec-label">THE STORY</span>
+              <h2 class="pin-heading">나만의<br>작은 숲을<br>찾아서</h2>
+              <p class="pin-desc">
+                도시의 숨가쁜 일상을 멈추고<br>
+                고향으로 돌아온 혜원.<br>
+                그곳에서 사계절을 보내며<br>
+                스스로의 뿌리를 찾습니다.
+              </p>
+              <div class="pin-pagination">
+                <span id="pinNum">01</span><span class="slash">/</span>03
+              </div>
+            </div>
+          </div>
+          <div class="pin-right">
+            <div class="scroll-scene" id="scene1">
+              <div class="scene-img-wrap">
+                <img src="https://images.pexels.com/photos/2583847/pexels-photo-2583847.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Winter" />
+              </div>
+              <div class="scene-text">
+                <h3>겨울, 도착</h3>
+                <p>아무것도 찾지 못한 채, 배가 고파서 고향으로 돌아왔습니다.</p>
+              </div>
+            </div>
+            <div class="scroll-scene" id="scene2">
+              <div class="scene-img-wrap">
+                <img src="https://images.pexels.com/photos/1093126/pexels-photo-1093126.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Spring" />
+              </div>
+              <div class="scene-text">
+                <h3>봄, 생명</h3>
+                <p>언 땅을 뚫고 나온 싹처럼, 다시 시작할 용기를 얻습니다.</p>
+              </div>
+            </div>
+            <div class="scroll-scene" id="scene3">
+              <div class="scene-img-wrap">
+                <img src="https://images.pexels.com/photos/33109/fall-autumn-red-season.jpg?auto=compress&cs=tinysrgb&w=1200" alt="Autumn" />
+              </div>
+              <div class="scene-text">
+                <h3>가을, 수확</h3>
+                <p>기다림 끝에 얻은 열매. 이제 다시 나아갈 힘이 생겼습니다.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="cooking" class="section section-cooking">
+        <div class="container">
+          <div class="sec-header" data-anim="fade-up">
+            <h2 class="sec-title">NATURE'S TABLE</h2>
+            <p class="sec-subtitle">자연이 내어준 재료로 정직하게 만든 한 끼</p>
+          </div>
+          
+          <div class="cook-grid">
+            <article class="cook-card" data-anim="fade-up" data-delay="0.1">
+              <div class="cook-img">
+                <img src="https://images.pexels.com/photos/691114/pexels-photo-691114.jpeg?auto=compress&cs=tinysrgb&w=800" alt="배추전">
+              </div>
+              <div class="cook-info">
+                <h3>배추전</h3>
+                <p>겨울 배추의 달큰함과 바삭한 식감.</p>
+              </div>
+            </article>
+            <article class="cook-card" data-anim="fade-up" data-delay="0.2">
+              <div class="cook-img">
+                <img src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=800" alt="밤조림">
+              </div>
+              <div class="cook-info">
+                <h3>밤조림</h3>
+                <p>가을의 시간을 천천히 졸여낸 달콤함.</p>
+              </div>
+            </article>
+            <article class="cook-card" data-anim="fade-up" data-delay="0.3">
+              <div class="cook-img">
+                <img src="https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=800" alt="파스타">
+              </div>
+              <div class="cook-info">
+                <h3>꽃 파스타</h3>
+                <p>봄의 색깔을 접시 위에 담다.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-quote">
+        <div class="quote-bg"></div>
+        <div class="quote-content">
+          <p class="quote-text" data-anim="text-reveal">
+            "다른 사람이 결정하는 인생은 살기 싫어."
           </p>
-
-          <div class="panel-row">
-            <div class="panel-item">
-              <h3 class="panel-item-title">계절</h3>
-              <p class="panel-item-text">
-                봄·여름·가을·겨울, 네 번의 계절을 따라 밥상과 풍경이 조금씩
-                변합니다. 계절이 바뀔 때마다 혜원의 마음도 천천히 달라집니다.
-              </p>
-            </div>
-
-            <div class="panel-item">
-              <h3 class="panel-item-title">음식</h3>
-              <p class="panel-item-text">
-                특별한 요리법보다 “지금 있는 재료로 차리는 밥상”이 중심에
-                있습니다. 자급자족에 가깝지만, 그래서 더 다정한 식탁이 펼쳐집니다.
-              </p>
-            </div>
-
-            <div class="panel-item">
-              <h3 class="panel-item-title">감정</h3>
-              <p class="panel-item-text">
-                실패, 회복, 멈춤과 같은 감정들이 크게 폭발하지 않고
-                조용히 스며듭니다. 영화를 보고 나면 이상하게 마음 한 구석이
-                따뜻해지는 느낌을 남깁니다.
-              </p>
-            </div>
-          </div>
-
-          <!-- 아래에서 위로 올라오는 흐릿한 빛 표현 -->
-          <div class="panel-blur"></div>
-        </div>
-      </section>
-
-      <!-- SEASONS / CREATOR'S VOICE 느낌 -->
-      <section class="section section-seasons">
-        <div class="section-inner narrow">
-          <h2 class="section-title">SEASONS</h2>
-          <p class="section-tagline">
-            봄·여름·가을·겨울, 네 번의 계절이 밥상 위에 쌓인다.
-          </p>
-        </div>
-
-        <div class="seasons-scroller">
-          <article class="season-card reveal">
-            <div class="season-tag">01 · SPRING</div>
-            <h3 class="season-title">새로 돋는 것들</h3>
-            <p class="season-text">
-              언 땅이 풀리면 텃밭에 작은 초록이 올라온다. 혜원은
-              도시에서 가져온 불안 대신, 흙 냄새를 맡으며 봄나물을
-              씻는다.
-            </p>
-          </article>
-
-          <article class="season-card reveal">
-            <div class="season-tag">02 · SUMMER</div>
-            <h3 class="season-title">숨이 찬 여름</h3>
-            <p class="season-text">
-              뜨거운 햇살과 소나기, 무성해진 잎들 사이에서
-              친구들과 웃고, 땀에 젖은 채 돌아와 차가운 밥을 먹는다.
-            </p>
-          </article>
-
-          <article class="season-card reveal">
-            <div class="season-tag">03 · AUTUMN</div>
-            <h3 class="season-title">거둬들이는 계절</h3>
-            <p class="season-text">
-              텃밭과 산에서 모은 것들을 천천히 손질해 저장한다.
-              지금의 배부름이 겨울을 버티게 해줄 거라는 걸, 혜원은
-              어렴풋이 안다.
-            </p>
-          </article>
-
-          <article class="season-card reveal">
-            <div class="season-tag">04 · WINTER</div>
-            <h3 class="season-title">조용한 겨울 방학</h3>
-            <p class="season-text">
-              하얀 눈과 고요한 집, 자꾸만 늦어지는 기상 시간.
-              아무것도 하지 못한 하루에도, 따끈한 밥 한 공기는
-              어김없이 지어진다.
-            </p>
-          </article>
-        </div>
-
-        <p class="seasons-hint">
-          좌우로 스크롤하여 네 계절의 장면을 살펴보세요.
-        </p>
-      </section>
-
-      <!-- CAST 인트로 (사진 5 느낌) -->
-      <section id="cast" class="section section-dark">
-        <div class="section-inner">
-          <h2 class="section-title">CAST</h2>
-          <p class="section-tagline">
-            사계절을 함께 통과하는 세 사람의 얼굴.
-          </p>
-
-          <div class="media-row">
-            <div class="media-block reveal">
-              <div class="video-frame">
-                <!-- 예고편/인터뷰 영상 자리 (임시) -->
-                <iframe
-                  src="https://www.youtube.com/embed/4vIuWEOsLyA?controls=0&rel=0"
-                  title="Little Forest Trailer"
-                  frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen
-                ></iframe>
-              </div>
-              <p class="body-text subtle">
-                작은 부엌과 텃밭, 그리고 사계절을 지나며 조금씩
-                숨을 고르는 청춘들의 이야기.
-              </p>
-            </div>
-
-            <div class="media-block reveal">
-              <div class="stack-block">
-                <h3 class="stack-title">혜원 · 김태리</h3>
-                <p class="body-text">
-                  도시에서 지쳐 고향으로 돌아와, 계절 따라 밥을 짓는
-                  청춘 혜원.
-                </p>
-              </div>
-              <div class="stack-block">
-                <h3 class="stack-title">재하 · 류준열</h3>
-                <p class="body-text">
-                  혜원의 어린 시절 친구이자, 같은 마을에서 묵묵히
-                  농사를 짓는 재하.
-                </p>
-              </div>
-              <div class="stack-block">
-                <h3 class="stack-title">은숙 · 진기주</h3>
-                <p class="body-text">
-                  고향 마을에서 자기 방식대로 버티며 살아가는 친구
-                  은숙.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- CAST 상세 + 블러 배경 (사진 10 구조, 1명 예시) -->
-      <section class="section section-dark">
-        <div class="section-inner narrow">
-          <div class="split-inner">
-            <div class="split-col reveal">
-              <h2 class="section-title">CHARACTER</h2>
-              <p class="section-tagline">혜원 · 김태리</p>
-              <p class="body-text">
-                혜원은 도시에서의 시간을 “실패한 도전”처럼 느끼지만,
-                고향에 돌아와 밥을 짓고 밭을 일구면서 스스로에게
-                조금 덜 엄격해지는 법을 배워간다.
-              </p>
-              <p class="body-text">
-                친구들과 나누는 밥상, 밤마다 써 내려가는 일기 속에서
-                ‘잘 산다’는 말의 기준을 다시 묻는다.
-              </p>
-            </div>
-            <div class="split-col reveal">
-              <div class="image-placeholder image-placeholder--character">
-                <div class="img-caption">혜원 · STILL</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- GALLERY (사진 6~7 구조) -->
-      <section id="gallery" class="section section-dark">
-        <div class="section-inner narrow">
-          <h2 class="section-title">GALLERY</h2>
-          <p class="section-tagline">
-            네 계절의 스틸컷. 클릭하면 장면이 커집니다.
+          <p class="quote-sub" data-anim="fade-up">
+            혜원의 대사 中
           </p>
         </div>
+      </section>
 
-        <div class="gallery-strip" id="galleryStrip">
-          <article class="gallery-item active">
-            <div class="gallery-label">1</div>
-            <div class="gallery-image gallery-image--spring"></div>
-            <div class="gallery-caption">SPRING</div>
-          </article>
-          <article class="gallery-item">
-            <div class="gallery-label">2</div>
-            <div class="gallery-image gallery-image--summer"></div>
-            <div class="gallery-caption">SUMMER</div>
-          </article>
-          <article class="gallery-item">
-            <div class="gallery-label">3</div>
-            <div class="gallery-image gallery-image--autumn"></div>
-            <div class="gallery-caption">AUTUMN</div>
-          </article>
-          <article class="gallery-item">
-            <div class="gallery-label">4</div>
-            <div class="gallery-image gallery-image--winter"></div>
-            <div class="gallery-caption">WINTER</div>
-          </article>
+      <section id="cast" class="cast-container">
+        <div class="cast-panel">
+          <div class="cast-bg">
+            <img src="https://images.pexels.com/photos/1553783/pexels-photo-1553783.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Kim Taeri">
+          </div>
+          <div class="cast-overlay"></div>
+          
+          <div class="cast-content initial-text">
+            <span class="creator-voice">CREATOR'S VOICE</span>
+            <h2 class="cast-quote">김태리</h2>
+            <p class="cast-quote-sub">혜원 역</p>
+            <button class="play-movie-btn"><i class="fas fa-play"></i></button>
+          </div>
+          
+          <div class="cast-content detail-info">
+              <div class="detail-content-wrapper">
+                  <h3 class="detail-main-quote">
+                      "심플하게 아주 좋은 그림이 찍혔다.<br>그것만으로도 굉장히 만족스럽다고 생각했다."
+                  </h3>
+                  <div class="detail-profiles">
+                      <div class="profile-item-top">
+                          <div class="profile-info-group">
+                              <div class="profile-image-container">
+                                  <img src="https://images.pexels.com/photos/1553783/pexels-photo-1553783.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Kim Taeri">
+                              </div>
+                              <div class="profile-info">
+                                  <span class="profile-role">배우 / 혜원 역</span>
+                                  <h4 class="profile-name">김태리</h4>
+                                  <p class="profile-desc">도망치듯 고향으로 돌아온 청춘. 평범한 시간 속에서 해답을 찾아간다.</p>
+                              </div>
+                          </div>
+                          <div class="interview-video">
+                              <img src="https://images.pexels.com/photos/2583847/pexels-photo-2583847.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Interview">
+                              <button class="play-interview-btn">▶ PLAY INTERVIEW</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+
+        <div class="cast-panel">
+          <div class="cast-bg">
+            <img src="https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Ryu Junyeol">
+          </div>
+          <div class="cast-overlay"></div>
+          
+          <div class="cast-content initial-text">
+            <span class="creator-voice">CREATOR'S VOICE</span>
+            <h2 class="cast-quote">류준열</h2>
+            <p class="cast-quote-sub">재하 역</p>
+            <button class="play-movie-btn"><i class="fas fa-play"></i></button>
+          </div>
+          
+          <div class="cast-content detail-info">
+               <div class="detail-content-wrapper">
+                  <h3 class="detail-main-quote">
+                      "자신의 소신을 지키기 위해 귀향한<br>재하의 모습에서 많은 것을 배웠다."
+                  </h3>
+                   <div class="detail-profiles">
+                      <div class="profile-item-top">
+                          <div class="profile-info-group">
+                              <div class="profile-image-container">
+                                  <img src="https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Ryu Junyeol">
+                              </div>
+                              <div class="profile-info">
+                                  <span class="profile-role">배우 / 재하 역</span>
+                                  <h4 class="profile-name">류준열</h4>
+                                  <p class="profile-desc">혜원의 든든한 초등학교 동창. 자신만의 방식대로 농사를 짓는다.</p>
+                              </div>
+                          </div>
+                          <div class="interview-video">
+                              <img src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Interview">
+                              <button class="play-interview-btn">▶ PLAY INTERVIEW</button>
+                          </div>
+                      </div>
+                   </div>
+              </div>
+          </div>
+        </div>
+
+        <div class="cast-panel">
+          <div class="cast-bg">
+            <img src="https://images.pexels.com/photos/1130626/pexels-photo-1130626.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Jin Kijoo">
+          </div>
+          <div class="cast-overlay"></div>
+          
+          <div class="cast-content initial-text">
+            <span class="creator-voice">CREATOR'S VOICE</span>
+            <h2 class="cast-quote">진기주</h2>
+            <p class="cast-quote-sub">은숙 역</p>
+             <button class="play-movie-btn"><i class="fas fa-play"></i></button>
+          </div>
+          
+          <div class="cast-content detail-info">
+               <div class="detail-content-wrapper">
+                  <h3 class="detail-main-quote">
+                      "평범한 일상 속 일탈을 꿈꾸는<br>은숙의 솔직함이 사랑스러웠다."
+                  </h3>
+                   <div class="detail-profiles">
+                      <div class="profile-item-top">
+                          <div class="profile-info-group">
+                              <div class="profile-image-container">
+                                  <img src="https://images.pexels.com/photos/1130626/pexels-photo-1130626.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Jin Kijoo">
+                              </div>
+                              <div class="profile-info">
+                                  <span class="profile-role">배우 / 은숙 역</span>
+                                  <h4 class="profile-name">진기주</h4>
+                                  <p class="profile-desc">혜원의 단짝 친구. 반복되는 일상에 지루함을 느끼지만 혜원과 함께 활력을 찾는다.</p>
+                              </div>
+                          </div>
+                           <div class="interview-video">
+                              <img src="https://images.pexels.com/photos/33109/fall-autumn-red-season.jpg?auto=compress&cs=tinysrgb&w=800" alt="Interview">
+                              <button class="play-interview-btn">▶ PLAY INTERVIEW</button>
+                          </div>
+                      </div>
+                   </div>
+              </div>
+          </div>
         </div>
       </section>
 
-      <!-- DIRECTOR (사진 9 느낌) -->
-      <section id="director" class="section section-credits">
-        <div class="section-inner narrow">
-          <h2 class="section-title">DIRECTOR</h2>
-          <p class="section-tagline">임순례 · 감독 / 연출</p>
+      <section id="gallery" class="section section-gallery">
+        <div class="gallery-header" data-anim="fade-up">
+          <h2 class="sec-title">MOMENTS</h2>
+        </div>
+        <div class="gallery-wrap" id="galleryWrap">
+          <div class="gallery-card g1"></div>
+          <div class="gallery-card g2"></div>
+          <div class="gallery-card g3"></div>
+          <div class="gallery-card g4"></div>
+        </div>
+      </section>
 
-          <div class="media-row">
-            <div class="media-block reveal">
-              <div class="image-placeholder image-placeholder--director">
-                <div class="img-caption">DIRECTOR</div>
+      <section id="video" class="section section-video">
+        <div class="container">
+          <div class="sec-header" data-anim="fade-up">
+            <span class="sec-label">VIDEOS</span>
+            <h2 class="sec-title">TRAILER & BEHIND</h2>
+            <p class="sec-subtitle">리틀 포레스트의 따뜻한 순간들을 영상으로 만나보세요.</p>
+          </div>
+
+          <div class="video-grid">
+            <div class="video-item main-video" data-anim="fade-up">
+              <div class="video-wrapper">
+                <iframe 
+                  src="https://www.youtube.com/embed/IWpBGln6bNk?rel=0&modestbranding=1" 
+                  title="Little Forest Main Trailer" 
+                  frameborder="0" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                  allowfullscreen>
+                </iframe>
+              </div>
+              <div class="video-caption">
+                <h3>메인 예고편</h3>
+                <p>잠시 쉬어가도, 조금 달라도, 서툴러도 괜찮아. 올 봄 새로운 시작 준비됐나요?.</p>
               </div>
             </div>
-            <div class="media-block reveal">
-              <ul class="credit-list">
-                <li>
-                  <span class="label">이름</span>
-                  <span>임순례</span>
-                </li>
-                <li>
-                  <span class="label">역할</span>
-                  <span>감독 / 연출</span>
-                </li>
-              </ul>
-              <p class="body-text">
-                일상의 디테일과 사람 사이의 온도를 담아내는 연출로 잘 알려진
-                감독. 《리틀 포레스트》에서는 도시에서 지친 청춘이 고향에서
-                숨을 고르는 과정을, 화려한 사건 대신 계절과 밥상, 사소한
-                대화들로 차분하게 그려낸다.
-              </p>
-              <p class="body-text">
-                “잘 산다”는 말의 기준을 조용히 다시 묻는 작품들을
-                만들어왔으며, 이 영화 역시 관객에게 작은 휴식 같은 시간을
-                선물한다.
-              </p>
+
+            <div class="video-sub-group">
+              <div class="video-item" data-anim="fade-up" data-delay="0.1">
+                <div class="video-wrapper">
+                  <iframe 
+                    src="https://www.youtube.com/embed/uSL0s4eq2Vs?rel=0&modestbranding=1" 
+                    title="Making Film" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                  </iframe>
+                </div>
+                <div class="video-caption small">
+                  <h3>제작기 영상</h3>
+                  <p>우리들의 특별한 사계절</p>
+                </div>
+              </div>
+
+              <div class="video-item" data-anim="fade-up" data-delay="0.2">
+                <div class="video-wrapper">
+                  <iframe 
+                    src="https://www.youtube.com/embed/LUcF5vBqEBI?rel=0&modestbranding=1" 
+                    title="Music Video" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                  </iframe>
+                </div>
+                <div class="video-caption small">
+                  <h3>뮤직 비디오</h3>
+                  <p>걷는 마음 - 융진</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
+      
     </main>
 
     <footer class="site-footer">
-      <div>비상업적 · 대학 과제용 팬메이드 페이지입니다.</div>
+      <div class="footer-inner">
+        <div class="footer-logo">LITTLE FOREST</div>
+        <p>
+          Film by Yim Soon-rye<br>
+          Based on the manga by Daisuke Igarashi
+        </p>
+        <span class="copyright">© 2018 Little Forest. Fan Made Website.</span>
+      </div>
     </footer>
   </body>
 </html>
