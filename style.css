@@ -70,24 +70,53 @@ body { -ms-overflow-style: none; scrollbar-width: none; }
 .intro-overlay.play .intro-text .line { opacity: 1; transform: translateY(0); }
 .intro-overlay.hide { opacity: 0; visibility: hidden; transition: 0.8s; }
 
-/* 3. HEADER */
+/* --- 3. HEADER 부분 수정 --- */
 .site-header {
   position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
-  padding: 24px 40px; display: flex; justify-content: space-between; align-items: center;
+  padding: 24px 40px; 
+  display: flex; 
+  justify-content: space-between; /* 양 끝 정렬 유지 (로고-버튼) */
+  align-items: center;
   mix-blend-mode: difference;
 }
-.logo { font-family: var(--font-serif); font-weight: 600; font-size: 1.2rem; letter-spacing: 0.1em; }
+
+/* 네비게이션을 화면 정중앙으로 강제 이동 */
+.main-nav {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 30px; /* 링크 간격 */
+}
+
+/* 기존 margin-left 제거 및 스타일 다듬기 */
 .main-nav a {
-  margin-left: 30px; font-size: 0.85rem; letter-spacing: 0.05em; color: rgba(255,255,255,0.7);
-  transition: color 0.3s;
+  margin-left: 0; /* 기존 margin 제거 */
+  font-size: 0.85rem; 
+  letter-spacing: 0.05em; 
+  color: rgba(255,255,255,0.7);
+  transition: all 0.3s;
+  position: relative;
+}
+
+/* 호버 시 밑줄 효과 추가 (선택사항 - UX 향상) */
+.main-nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -5px; left: 0; width: 0%; height: 1px;
+  background: #fff;
+  transition: width 0.3s;
 }
 .main-nav a:hover { color: #fff; }
-.sound-toggle {
-  color: #fff; border: 1px solid rgba(255,255,255,0.3);
-  padding: 6px 14px; border-radius: 20px; display: flex; align-items: center; gap: 6px;
-  font-size: 0.75rem; transition: 0.3s;
+.main-nav a:hover::after { width: 100%; }
+
+/* 모바일 대응: 화면이 좁아지면 네비게이션 조정 */
+@media (max-width: 900px) {
+  .site-header { padding: 20px; }
+  .logo { display: none; } /* 공간 부족 시 로고 숨기거나 햄버거 메뉴로 변경 고려 */
+  .main-nav { position: static; transform: none; gap: 15px; }
+  .main-nav a { font-size: 0.75rem; }
 }
-.sound-toggle:hover { border-color: #fff; }
 
 /* 4. HERO SECTION */
 .hero {
@@ -464,12 +493,75 @@ body { -ms-overflow-style: none; scrollbar-width: none; }
   }
 }
 
-/* FOOTER */
+/* --- FOOTER 부분 전체 교체/수정 --- */
 .site-footer {
-  padding: 60px 20px; text-align: center; border-top: 1px solid #111; color: var(--text-muted); font-size: 0.8rem;
+  padding: 80px 20px;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.05); /* 아주 연한 선 */
+  background-color: #020302; /* 비디오 섹션보다 아주 조금 더 어두운 톤 */
+  color: var(--text-muted);
+  font-size: 0.8rem;
 }
-.footer-logo { font-family: var(--font-serif); font-size: 1.2rem; color: var(--text-main); margin-bottom: 1rem; }
 
+.footer-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-logo {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  color: var(--text-main);
+  margin-bottom: 20px;
+  letter-spacing: 0.1em;
+}
+
+.footer-credits {
+  font-size: 0.9rem;
+  color: #aaa;
+  margin-bottom: 30px;
+}
+
+/* 구분선 */
+.footer-divider {
+  width: 40px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.2);
+  margin-bottom: 30px;
+}
+
+/* 법적 고지 및 과제 설명 박스 스타일 */
+.footer-disclaimer {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.03); /* 살짝 밝은 배경 박스 */
+  padding: 30px;
+  border-radius: 8px;
+  margin-bottom: 40px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.project-info {
+  font-size: 0.9rem;
+  color: #ccc;
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+
+.copyright-notice {
+  font-size: 0.75rem;
+  color: #666; /* 덜 중요한 텍스트는 어둡게 */
+  line-height: 1.5;
+}
+
+.copyright {
+  font-size: 0.8rem;
+  color: #555;
+  font-family: var(--font-sans);
+}
 /* ANIMATION UTILS */
 [data-anim="fade-up"] { opacity: 0; transform: translateY(40px); }
 
