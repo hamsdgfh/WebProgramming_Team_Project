@@ -23,20 +23,31 @@ document.addEventListener("DOMContentLoaded", () => {
   let isAudioPlaying = false;
 
   // 오디오 제어 함수
-  const toggleAudio = (play) => {
-    if (play) {
-      bgAudio.play().then(() => {
-        isAudioPlaying = true;
-        soundStatus.textContent = "ON";
-        soundToggle.classList.add("active");
-      }).catch(err => console.log("Audio Blocked", err));
-    } else {
-      bgAudio.pause();
-      isAudioPlaying = false;
-      soundStatus.textContent = "OFF";
-      soundToggle.classList.remove("active");
-    }
-  };
+  // [1] 위젯 요소를 먼저 찾습니다 (이 줄이 꼭 있어야 합니다!)
+const musicWidget = document.getElementById("musicWidget");
+
+// [2] 오디오 제어 함수 수정
+const toggleAudio = (play) => {
+  if (play) {
+    bgAudio.play().then(() => {
+      isAudioPlaying = true;
+      soundStatus.textContent = "ON";
+      soundToggle.classList.add("active");
+      
+      // ▶ 노래가 켜지면: 위젯에 'playing' 클래스를 추가해서 막대가 춤추게 함
+      if(musicWidget) musicWidget.classList.add("playing");
+
+    }).catch(err => console.log("Audio Blocked", err));
+  } else {
+    bgAudio.pause();
+    isAudioPlaying = false;
+    soundStatus.textContent = "OFF";
+    soundToggle.classList.remove("active");
+    
+    // ⏸ 노래가 꺼지면: 'playing' 클래스를 제거해서 막대를 멈춤
+    if(musicWidget) musicWidget.classList.remove("playing");
+  }
+};
 
   // 인트로 시작 함수
   const startExperience = (withSound) => {
