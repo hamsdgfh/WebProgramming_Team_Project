@@ -176,9 +176,18 @@ body { -ms-overflow-style: none; scrollbar-width: none; }
   position: absolute; inset: 0;
   background: linear-gradient(to bottom, rgba(5,8,5,0.3), var(--bg-deep));
 }
-.hero-content { z-index: 1; text-align: center; position: relative; top: -20px; }
-.hero-kicker {
-  font-size: 0.8rem; letter-spacing: 0.3em; color: var(--accent); margin-bottom: 1.5rem;
+/* --- [수정] .hero-content 부분을 이걸로 교체하세요 --- */
+.hero-content { 
+  z-index: 1; 
+  text-align: center; 
+  
+  /* 기존 position: relative; top: -20px; 을 지우고 아래 4줄로 변경 */
+  position: absolute; /* 독립적인 위치를 가짐 */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* 정확히 정중앙 배치 */
+  width: 100%; /* 가로 너비 꽉 채움 (텍스트 중앙 정렬 유지용) */
+}
 }
 .hero-title {
   font-family: var(--font-serif); font-size: 5rem; line-height: 1; margin-bottom: 2rem;
