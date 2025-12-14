@@ -233,9 +233,10 @@ body { -ms-overflow-style: none; scrollbar-width: none; }
 .scene-text h3 { font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 0.5rem; }
 .scene-text p { font-size: 0.95rem; color: var(--text-muted); }
 
-/* 6. COOKING SECTION */
+/* --- 6. COOKING SECTION 수정 --- */
 .section-cooking {
-  padding: 120px 20px; background: #080c08;
+  padding: 120px 20px; 
+  background: #080c08;
 }
 .container { max-width: var(--max-width); margin: 0 auto; }
 .sec-header { text-align: center; margin-bottom: 80px; }
@@ -244,20 +245,45 @@ body { -ms-overflow-style: none; scrollbar-width: none; }
 }
 .sec-subtitle { color: var(--text-muted); }
 
+/* 그리드 레이아웃 변경 핵심 부분 */
 .cook-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;
+  display: grid; 
+  /* 데스크톱: 4개 배치 */
+  grid-template-columns: repeat(4, 1fr); 
+  gap: 20px; /* 카드가 많아졌으니 간격을 조금 줄임 */
 }
+
 .cook-card {
-  background: var(--bg-card); border-radius: 12px; overflow: hidden;
+  background: var(--bg-card); 
+  border-radius: 12px; 
+  overflow: hidden;
   transition: transform 0.4s;
 }
 .cook-card:hover { transform: translateY(-10px); }
-.cook-img { height: 280px; overflow: hidden; }
+
+/* 이미지 높이 조정 (4개라 폭이 좁아지므로 비율 조정) */
+.cook-img { height: 220px; overflow: hidden; } 
 .cook-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
 .cook-card:hover .cook-img img { transform: scale(1.1); }
-.cook-info { padding: 24px; text-align: center; }
-.cook-info h3 { font-family: var(--font-serif); font-size: 1.2rem; margin-bottom: 8px; color: var(--accent); }
-.cook-info p { font-size: 0.9rem; color: var(--text-muted); }
+
+.cook-info { padding: 20px; text-align: center; }
+.cook-info h3 { font-family: var(--font-serif); font-size: 1.1rem; margin-bottom: 8px; color: var(--accent); }
+.cook-info p { font-size: 0.85rem; color: var(--text-muted); word-break: keep-all; }
+
+/* --- 반응형 (모바일/태블릿 2x2 배치) --- */
+@media (max-width: 1024px) {
+  .cook-grid {
+    /* 1024px 이하(태블릿, 모바일)에서는 2열로 변경 -> 자동으로 2x2가 됨 */
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 15px;
+  }
+}
+
+/* (선택사항) 아주 작은 스마트폰에서는 1열로 보여주고 싶다면 아래 주석 해제 */
+/* @media (max-width: 480px) {
+  .cook-grid { grid-template-columns: 1fr; }
+} 
+*/
 
 /* 7. QUOTE SECTION */
 .section-quote {
