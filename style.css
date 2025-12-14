@@ -165,7 +165,7 @@ body { -ms-overflow-style: none; scrollbar-width: none; }
   .main-nav a { font-size: 0.75rem; }
 }
 
-/* 4. HERO SECTION */
+/* 4. HERO SECTION (전체 복구 및 수정) */
 .hero {
   position: relative; width: 100%; height: 100vh;
   display: flex; align-items: center; justify-content: center; overflow: hidden;
@@ -176,27 +176,41 @@ body { -ms-overflow-style: none; scrollbar-width: none; }
   position: absolute; inset: 0;
   background: linear-gradient(to bottom, rgba(5,8,5,0.3), var(--bg-deep));
 }
-/* --- [수정] .hero-content 부분을 이걸로 교체하세요 --- */
+
+/* [중앙 정렬 수정된 부분] */
 .hero-content { 
   z-index: 1; 
   text-align: center; 
-  
-  /* 기존 position: relative; top: -20px; 을 지우고 아래 4줄로 변경 */
-  position: absolute; /* 독립적인 위치를 가짐 */
+  position: absolute; /* 중앙 고정 */
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); /* 정확히 정중앙 배치 */
-  width: 100%; /* 가로 너비 꽉 채움 (텍스트 중앙 정렬 유지용) */
+  transform: translate(-50%, -50%);
+  width: 100%;
 }
+
+/* [지워졌던 스타일 복구 - 주황색 작은 글씨] */
+.hero-kicker {
+  font-size: 0.8rem; 
+  letter-spacing: 0.3em; 
+  color: var(--accent); /* 주황색 */
+  margin-bottom: 1.5rem;
+  font-weight: 500;
 }
+
+/* [지워졌던 스타일 복구 - 큰 제목] */
 .hero-title {
-  font-family: var(--font-serif); font-size: 5rem; line-height: 1; margin-bottom: 2rem;
+  font-family: var(--font-serif); 
+  font-size: 5rem; 
+  line-height: 1; 
+  margin-bottom: 2rem;
   background: linear-gradient(to bottom, #fff, #bbb);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
 .hero-desc { color: var(--text-muted); font-size: 1.1rem; font-weight: 300; }
+
 .scroll-ind {
   position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
   display: flex; flex-direction: column; align-items: center; gap: 10px; opacity: 0.6;
@@ -204,11 +218,11 @@ body { -ms-overflow-style: none; scrollbar-width: none; }
 .scroll-ind .txt { font-size: 0.7rem; letter-spacing: 0.1em; }
 .scroll-ind .line { width: 1px; height: 60px; background: rgba(255,255,255,0.4); }
 
-/* --- HERO MUSIC WIDGET (새로 추가) --- */
+/* --- HERO MUSIC WIDGET (유지) --- */
 .hero-music-info {
   position: absolute;
   bottom: 40px;
-  right: 40px; /* 우측 하단 배치 */
+  right: 40px; 
   z-index: 10;
   display: flex;
   align-items: center;
@@ -217,66 +231,25 @@ body { -ms-overflow-style: none; scrollbar-width: none; }
   font-family: var(--font-sans);
 }
 
-/* 이퀄라이저 바 4개 */
-.music-bars {
-  display: flex;
-  align-items: flex-end;
-  gap: 3px;
-  height: 20px;
-}
-
-.music-bars span {
-  display: block;
-  width: 3px;
-  height: 5px; /* 기본 높이 (음악 꺼짐 상태) */
-  background-color: var(--accent); /* 포인트 컬러 사용 */
-  border-radius: 3px;
-  transition: height 0.2s;
-}
-
-/* 음악 재생 중(.playing)일 때 애니메이션 작동 */
-.hero-music-info.playing .music-bars span {
-  animation: bounce 1s infinite ease-in-out;
-}
-
-/* 막대마다 박자를 다르게 설정 */
+.music-bars { display: flex; align-items: flex-end; gap: 3px; height: 20px; }
+.music-bars span { display: block; width: 3px; height: 5px; background-color: var(--accent); border-radius: 3px; transition: height 0.2s; }
+.hero-music-info.playing .music-bars span { animation: bounce 1s infinite ease-in-out; }
 .hero-music-info.playing .music-bars span:nth-child(1) { animation-delay: 0.0s; }
 .hero-music-info.playing .music-bars span:nth-child(2) { animation-delay: 0.2s; }
 .hero-music-info.playing .music-bars span:nth-child(3) { animation-delay: 0.4s; }
 .hero-music-info.playing .music-bars span:nth-child(4) { animation-delay: 0.1s; }
 
-@keyframes bounce {
-  0%, 100% { height: 5px; }
-  50% { height: 20px; }
-}
+@keyframes bounce { 0%, 100% { height: 5px; } 50% { height: 20px; } }
 
-/* 텍스트 스타일 */
-.music-details {
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-}
+.music-details { display: flex; flex-direction: column; text-align: left; }
+.music-label { font-size: 0.65rem; letter-spacing: 0.1em; opacity: 0.6; text-transform: uppercase; }
+.music-title { font-size: 0.85rem; font-weight: 400; letter-spacing: 0.05em; }
 
-.music-label {
-  font-size: 0.65rem;
-  letter-spacing: 0.1em;
-  opacity: 0.6;
-  text-transform: uppercase;
-}
-
-.music-title {
-  font-size: 0.85rem;
-  font-weight: 400;
-  letter-spacing: 0.05em;
-}
-
-/* 모바일 대응: 화면 좁으면 숨기거나 위치 조정 */
 @media (max-width: 768px) {
-  .hero-music-info {
-    bottom: 20px; right: 20px;
-  }
-  .music-label { display: none; } /* 공간 절약 */
+  .hero-music-info { bottom: 20px; right: 20px; }
+  .music-label { display: none; }
   .music-title { font-size: 0.75rem; }
+  .hero-title { font-size: 3rem; } /* 모바일에서 제목 크기 조절 */
 }
 
 /* 5. STORY (PINNING) */
