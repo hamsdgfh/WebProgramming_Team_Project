@@ -1,82 +1,116 @@
-# 🎬 LITTLE FOREST | 리틀 포레스트 : 잠시 쉬어가도 괜찮아
+# LITTLE FOREST — Cinematic Fan Webpage
 
-> "잠시 쉬어가도, 달라도, 평범해도 괜찮아." <br>
-> 영화 <리틀 포레스트>의 따뜻한 감성과 사계절의 아름다움을 담아낸 시네마틱 웹사이트입니다.
+> 한신대학교 AISW **웹프로그래밍 기말 프로젝트**로 제작한 비상업적 팬 웹사이트입니다.  
+> 영화 **〈리틀 포레스트〉**의 분위기(사계절·자연·휴식)를 “영상 + 스크롤 연출” 중심으로 담았습니다.
 
-<br>
+- **Live Demo:** https://hamsdgfh.github.io/WebProgramming_Team_Project/
+- **Tech:** HTML / CSS / JavaScript  
+  + GSAP(ScrollTrigger), Lenis Smooth Scroll
 
-## 📖 프로젝트 소개 (Project Info)
-이 프로젝트는 **한신대학교 [웹프로그래밍] 기말고사 과제**로 제작되었습니다.
-단순한 정보 전달을 넘어, 사용자가 영화 속 혜원의 숲에 들어온 듯한 **몰입감 있는 시각적 경험(Cinematic Experience)**을 제공하는 것을 목표로 합니다.
+---
 
-* **주제:** 영화 <리틀 포레스트 (Little Forest)> 소개 및 홍보
-* **컨셉:** 힐링, 자연, ASMR, 미니멀리즘
-* **제작 기간:** 2025.12.04~2025.12.15
-* **개발:** 신민석 (1인 프로젝트)
+## 1) 웹페이지 소개
 
-<br>
+이 웹페이지는 영화 〈리틀 포레스트〉를 **홍보 페이지처럼** 감상할 수 있도록 구성했습니다.
 
-## ✨ 주요 기능 (Key Features)
+- 첫 진입 시 **BGM ON/OFF 선택(사운드 게이트)** → 영화처럼 “입장 연출” 시작  
+- 메인(Hero) 구간에서 **배경 영상 + 타이포그래피**로 무드 형성  
+- 스크롤을 내리면 **STORY(겨울→봄→여름→가을)**, **COOKING**, **CAST**, **GALLERY**, **VIDEO** 섹션이 순서대로 이어지며  
+  각 섹션마다 다른 방식의 **스크롤 애니메이션/전환 효과**로 흐름을 만들었습니다.
 
-이 웹사이트는 스크롤과 인터랙션을 통해 영화의 서사를 따라가도록 설계되었습니다.
+---
 
-### 1. 🎧 사운드 게이트 & 인트로 (Sound Gate)
-* **몰입형 입장:** 사이트 진입 시 바로 본문이 나오지 않고, '소리 켜기/끄기'를 선택하는 게이트 페이지를 거칩니다.
-* **감성적 연출:** 입장을 클릭하면 배경 음악(BGM)이 재생되며, 영화의 핵심 문구가 순차적으로 나타나는 오프닝 애니메이션이 실행됩니다.
+## 2) 구현 기능
 
-### 2. 🎞️ 시네마틱 스크롤 애니메이션 (Cinematic Scroll)
-* **GSAP & ScrollTrigger:** 스크롤 위치에 따라 요소가 부드럽게 나타나고 사라지는 고급 애니메이션을 적용했습니다.
-* **Lenis Smooth Scroll:** 마우스 휠을 굴릴 때 끊김 없이 부드럽게 흐르는 '관성 스크롤'을 구현하여 영화 같은 느낌을 줍니다.
+### 🎵 사운드(오디오)
+- **입장 시 사운드 ON/OFF 선택 모달**
+- 상단의 **사운드 토글 버튼(ON/OFF 표시)**
+- 재생 중에는 우측 하단 **Now Playing 위젯(바 애니메이션)** 표시
 
-### 3. ❄️🌸🌿🍁 사계절 스토리텔링 (Pinning Effect)
-* **고정형 레이아웃:** 왼쪽의 텍스트 영역(Story Description)은 고정된 상태로, 오른쪽의 계절별 이미지만 스크롤되는 **Pinning 기법**을 사용했습니다.
-* **스토리 흐름:** 겨울 → 봄 → 여름 → 가을로 이어지는 영화의 시간적 흐름을 시각적으로 표현했습니다.
+### 🎬 Hero(메인)
+- **배경 영상 자동 재생(무음/반복/모바일 인라인)**  
+- 스크롤 시 **Hero 배경 파랄랙스(살짝 이동)**  
+- 첫 화면에 텍스트가 자연스럽게 등장하는 **Fade-Up 애니메이션**
 
-### 4. 🎭 인터랙티브 등장인물 소개 (Sequential Cast)
-이 프로젝트에서 가장 공들인 기술적 구현 부분입니다.
-* **3단계 시퀀스:** 사용자가 스크롤을 내림에 따라 `중앙 대사` → `좌측 인물 소개(고정)` → `상세 정보 패널(블러 효과)` 순서로 정보가 물 흐르듯 등장합니다.
-* **타이포그래피 디자인:** 영상 썸네일 대신, 각 인물의 성격을 대변하는 **명대사 타이포그래피 카드**를 우측에 배치하여 감성을 더했습니다.
+### 📖 Story(사계절 스토리)
+- **좌측 텍스트 고정(Pin)** + 우측 장면이 스크롤에 따라 바뀌는 구조
+- 장면이 바뀔 때 **활성화(Opacity/Scale) + 이미지 확대 효과**
+- 현재 장면을 보여주는 **페이지 번호(01/04) 자동 변경**
 
-### 5. 📱 반응형 웹 디자인 (Responsive Design)
-* PC, 태블릿, 모바일 등 모든 디바이스 환경에 맞춰 레이아웃이 최적화됩니다.
-* 모바일 환경에서는 복잡한 애니메이션 레이아웃을 간소화하여 가독성을 높였습니다.
+### 🍳 Cooking
+- 사계절 요리를 **카드 그리드**로 구성 (데스크톱 4열 / 태블릿 2열)
+- 카드 Hover 시 **상승 + 이미지 확대** 효과
+- 섹션 진입 시 **Fade-Up 등장**
 
-<br>
+### 🎭 Cast(시네마틱 패널)
+- 배우별로 **1인당 1 패널(풀스크린)** 구성
+- 스크롤에 따라:
+  1) **중앙 대사 등장 → 사라짐**
+  2) 왼쪽 정보(이름/역할/썸네일) **등장**
+  3) **블러 패널이 아래에서 올라오며** 상세 프로필/대사 카드 노출
+- 각 패널은 **핀 고정 + 단계별 타임라인**으로 자연스럽게 전환
 
-## 🛠️ 사용 기술 (Tech Stack)
+### 🖼️ Gallery
+- 4개의 스틸컷을 **가로 카드 형태**로 배치
+- Hover 시 선택 카드가 **확대(비율 변화) + 선명해짐**
 
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+### ▶️ Video
+- 유튜브 영상 **iframe 임베드** (메인 1개 + 서브 2개)
+- **반응형 16:9 비율 유지**  
+- 영상 아래에 제목/설명 캡션 제공
 
-### Libraries
-* **GSAP (GreenSock Animation Platform):** 복잡한 스크롤 트리거 및 타임라인 애니메이션 구현
-* **Lenis:** 부드러운 스크롤 경험 제공
-* **Font Awesome:** 아이콘 및 UI 요소 활용
+### ✨ 공통 연출
+- 페이지 전체에 **부드러운 스무스 스크롤(Lenis)**
+- 스크롤 위치에 따라 콘텐츠가 자연스럽게 나타나는 **Fade-Up 애니메이션**
+- 첫 진입 연출 동안 **스크롤 잠금(no-scroll)** → 연출 종료 후 자동 해제
 
-<br>
+---
 
-## 📂 폴더 구조 (Directory Structure)
+## 3) 프로젝트 구조
 
 ```bash
-Little-Forest-Web/
-├── index.html          # 메인 페이지 구조
-├── style.css           # 전체 디자인 및 반응형 스타일
-├── script.js           # 스크롤 애니메이션 및 인터랙션 로직
-├── assets/
-│   ├── images/         # 영화 스틸컷 및 소스 이미지
-│   └── audio/          # 배경 음악 (BGM)
-└── README.md           # 프로젝트 설명 파일
+WebProgramming_Team_Project/
+├─ index.html
+├─ style.css
+├─ script.js
+└─ assets/
+   ├─ audio/
+   │  └─ little-forest-bgm.mp3
+   └─ images/
+      ├─ story_*.jpg
+      ├─ cooking_*.jpg
+      ├─ cast_*.jpg / *.png
+      └─ moment_*.jpg
 ```
+
+---
+
+## 4) 실행 방법
+
+1. 레포를 다운로드/클론합니다.
+2. VS Code에서 프로젝트 폴더를 엽니다.
+3. **Live Server**로 `index.html`을 실행합니다.  
+   (또는 간단 서버: `npx serve`)
+
+---
+
+## 5) 사용 라이브러리
+
+- **GSAP + ScrollTrigger**: 스크롤 애니메이션
+- **Lenis**: 스무스 스크롤
+- **Google Fonts**: Noto Sans KR, Noto Serif KR
+
+---
 
 ## ⚠️ 저작권 및 출처 (Credits & Disclaimer)
 
 본 웹사이트는 비상업적 학습 목적으로 제작된 **팬 사이트(Fan Made Website)**입니다.
 
-* **Film:** Little Forest (리틀 포레스트, 2018) directed by Yim Soon-rye
-* **Original Work:** Manga by Daisuke Igarashi
-* **Images & Video:** Official Trailers, Movie Stills, Pexels (Free Stock Images)
-* **Font:** Google Fonts (Noto Sans KR, Noto Serif KR)
+- **Film:** Little Forest (리틀 포레스트, 2018) directed by Yim Soon-rye  
+- **Original Work:** Manga by Daisuke Igarashi  
+- **Images & Video:** Official Trailers, Movie Stills, Pexels (Free Stock Images)  
+- **Font:** Google Fonts (Noto Sans KR, Noto Serif KR)
 
-> *사용된 모든 이미지와 영상, 오디오의 저작권은 원작자 및 제작사에 귀속됩니다.*
-> *Copyright Disclaimer: This site is for educational purposes only. All rights belong to their respective owners.*
+> 사용된 모든 이미지와 영상, 오디오의 저작권은 원작자 및 제작사에 귀속됩니다.  
+> Copyright Disclaimer: This site is for educational purposes only. All rights belong to their respective owners.
+
