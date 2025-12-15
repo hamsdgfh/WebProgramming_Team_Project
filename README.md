@@ -87,10 +87,15 @@ WebProgramming_Team_Project/
 
 ## 4) 실행 방법
 
+### A. 링크로 바로 실행 (추천)
+아래 **Live Demo** 링크를 클릭하면, 설치 없이 바로 웹사이트를 볼 수 있습니다.
+
+- **Live Demo:** https://hamsdgfh.github.io/WebProgramming_Team_Project/
+
+### B. 로컬에서 실행 (개발/수정용)
 1. 레포를 다운로드/클론합니다.
 2. VS Code에서 프로젝트 폴더를 엽니다.
 3. **Live Server**로 `index.html`을 실행합니다.  
-   (또는 간단 서버: `npx serve`)
 
 ---
 
